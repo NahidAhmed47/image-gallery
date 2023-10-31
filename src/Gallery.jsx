@@ -2,7 +2,7 @@ import React from 'react';
 
 const Gallery = () => {
     return (
-        <div className='font-extrabold text-5xl text-center'>
+        <div className='max-w-[1536px] mx-auto '>
             this is gallery
         </div>
     );
