@@ -1,5 +1,5 @@
 {
-  "name": "image-gallery",
+  "name": "image-gallery-2",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,8 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "array-move": "^3.0.1",
+    "framer-motion": "^3.2.2-rc.1",
+    "popmotion": "^9.1.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-scripts": "^4.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

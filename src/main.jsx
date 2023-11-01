@@ -6,5 +6,5 @@ import Gallery from './pages/Gallery'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Gallery/>
-  </React.StrictMode>
+  </React.StrictMode>,
 )
