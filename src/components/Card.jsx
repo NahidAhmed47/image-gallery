@@ -27,15 +27,10 @@ const Card = ({ i, item, updatePosition, updateOrder }) => {
       className={`border-2 rounded-[10px] overflow-hidden cursor-pointer w-full ${
         i === 0
           ? "col-start-1 col-end-3 row-start-1 row-end-3 h-full"
-          : " h-[200px]"
+          : "h-[120px] sm:h-[150px] md:h-[170px] xl:h-[200px] "
       }`}
-      whileHover={{
-        scale: 1.03,
-        boxShadow: "0px 3px 3px rgba(0,0,0,0.15)",
-      }}
       whileTap={{
-        scale: 1.12,
-        boxShadow: "0px 5px 5px rgba(0,0,0,0.1)",
+        scale: 1.01,
       }}
       drag={true}
       onDragStart={() => setDragging(true)}
