@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Card from "../components/Card";
 import { usePositionReorder } from "../utls/use-position-reorder";
 import Header from "../components/Header";
 import data from "../data/data";
+import toast from 'react-hot-toast';
 
 const Gallery = () => {
-  const [order, setOrder, updatePosition, updateOrder] = usePositionReorder(data);
+  const [order, setOrder, updatePosition, updateOrder] =
+    usePositionReorder(data);
   const [checkedCards, setCheckedCards] = useState([]);
 
   // set card checked state, if card is checked then remove it from checkedCard array, if card is not checked then add it to checkedCard array
@@ -20,6 +22,7 @@ const Gallery = () => {
   // delete checked cards
   const handleDeleteCards = () => {
     setOrder(order.filter((item) => !checkedCards?.includes(item?.id)));
+    toast.success(`${checkedCards?.length} cards deleted successfully`);
     setCheckedCards([]);
   };
   return (
@@ -42,16 +45,19 @@ const Gallery = () => {
             />
           ))}
           {/* upload image container */}
-          <div className="w-full h-[120px] sm:h-[150px] md:h-[170px] xl:h-[200px] border-2 border-dashed rounded-[10px] overflow-hidden flex flex-col items-center justify-center gap-2 md:gap-3.5 cursor-pointer">
-            <img
-              src={"/icons/image-icon.png"}
-              alt=""
-              className="w-10 h-auto rounded-lg"
-            />
-            <p className="text-xs md:text-sm lg:text-lg text-gray-700 font-semibold">
-              Add Images
-            </p>
-          </div>
+          <label htmlFor="fileUpload">
+            <div className="w-full h-[120px] sm:h-[150px] md:h-[170px] xl:h-[200px] border-2 border-dashed rounded-[10px] overflow-hidden flex flex-col items-center justify-center gap-2 md:gap-3.5 cursor-pointer">
+              <img
+                src={"/icons/image-icon.png"}
+                alt=""
+                className="w-10 h-auto rounded-lg"
+              />
+              <p className="text-xs md:text-sm lg:text-lg text-gray-700 font-semibold">
+                Add Images
+              </p>
+              <input type="file" name="" className="hidden" id="fileUpload" />
+            </div>
+          </label>
         </div>
       </div>
     </div>
