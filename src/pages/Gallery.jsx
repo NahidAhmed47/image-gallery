@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "../components/Card";
 import { usePositionReorder } from "../utls/use-position-reorder";
 import Header from "../components/Header";
@@ -6,6 +6,15 @@ import data from "../data/data";
 
 const Gallery = () => {
   const [order, updatePosition, updateOrder] = usePositionReorder(data);
+  const [checkedCard, setCheckedCard] = useState([]);
+  // set card checked state
+  const setCardChecked = (id) => {
+    if (checkedCard.includes(id)) {
+      setCheckedCard(checkedCard.filter((i) => i !== id));
+    } else {
+      setCheckedCard([...checkedCard, id]);
+    }
+  };
   return (
     <div className="md:px-5 w-full h-full">
       <div className="max-w-[1280px] mx-auto w-full md:my-5 xl:my-10 md:border min-h-[70vh] rounded-[10px] h-full">
@@ -18,6 +27,8 @@ const Gallery = () => {
               i={i}
               updatePosition={updatePosition}
               updateOrder={updateOrder}
+              checkedCard={checkedCard}
+              setCardChecked={setCardChecked}
             />
           ))}
           {/* upload image container */}
