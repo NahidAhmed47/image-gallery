@@ -5,8 +5,7 @@ import Header from "../components/Header";
 import data from "../data/data";
 
 const Gallery = () => {
-  const [cardData, setCardData] = useState([...data]);
-  const [order, setOrder, updatePosition, updateOrder] = usePositionReorder(cardData);
+  const [order, setOrder, updatePosition, updateOrder] = usePositionReorder(data);
   const [checkedCards, setCheckedCards] = useState([]);
 
   // set card checked state, if card is checked then remove it from checkedCard array, if card is not checked then add it to checkedCard array
@@ -25,7 +24,7 @@ const Gallery = () => {
   };
   return (
     <div className="md:px-5 w-full h-full">
-      <div className="max-w-[1280px] mx-auto w-full md:my-5 xl:my-10 md:border min-h-[70vh] rounded-[10px] h-full">
+      <div className="max-w-[1280px] mx-auto w-full md:my-5 xl:my-10 md:border min-h-[70vh] rounded-[10px] h-full bg-white">
         <Header
           checkedCards={checkedCards}
           handleDeleteCards={handleDeleteCards}
