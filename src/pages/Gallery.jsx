@@ -6,31 +6,22 @@ import data from "../data/data";
 
 const Gallery = () => {
   const [cardData, setCardData] = useState([...data]);
-  const [order, setOrder, updatePosition, updateOrder] =
-    usePositionReorder(cardData);
+  const [order, setOrder, updatePosition, updateOrder] = usePositionReorder(cardData);
   const [checkedCards, setCheckedCards] = useState([]);
-  
+
   // set card checked state, if card is checked then remove it from checkedCard array, if card is not checked then add it to checkedCard array
   const setCardChecked = (id) => {
     if (checkedCards?.includes(id)) {
-      const data = checkedCards?.filter((i) => i !== id);
-      setCheckedCards(data);
-      localStorage.setItem("checkedCards", JSON.stringify(data));
+      setCheckedCards(checkedCards?.filter((i) => i !== id));
     } else {
       setCheckedCards([...checkedCards, id]);
-      localStorage.setItem(
-        "checkedCards",
-        JSON.stringify([...checkedCards, id])
-      );
     }
   };
 
   // delete checked cards
   const handleDeleteCards = () => {
-    const saveCheckedCards = JSON.parse(localStorage.getItem("checkedCards"));
-    setOrder(cardData.filter((item) => !saveCheckedCards?.includes(item?.id)));
+    setOrder(order.filter((item) => !checkedCards?.includes(item?.id)));
     setCheckedCards([]);
-    localStorage.removeItem("checkedCards");
   };
   return (
     <div className="md:px-5 w-full h-full">
@@ -52,7 +43,7 @@ const Gallery = () => {
             />
           ))}
           {/* upload image container */}
-          <div className="w-full h-full border-2 border-dashed rounded-[10px] overflow-hidden flex flex-col items-center justify-center gap-2 md:gap-3.5 cursor-pointer">
+          <div className="w-full h-[120px] sm:h-[150px] md:h-[170px] xl:h-[200px] border-2 border-dashed rounded-[10px] overflow-hidden flex flex-col items-center justify-center gap-2 md:gap-3.5 cursor-pointer">
             <img
               src={"/icons/image-icon.png"}
               alt=""
