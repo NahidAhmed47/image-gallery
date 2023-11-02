@@ -19,11 +19,10 @@ export const usePositionReorder = (initialState) => {
     if (targetIndex !== i) setOrder(move(order, i, targetIndex));
   };
 
-  return [order, updatePosition, updateOrder];
+  return [order, setOrder, updatePosition, updateOrder];
 };
 
 // This margin needs to match space between cells exactly.
-// TODO: Optimize for safer handling
 const margin = 20;
 
 export const findIndex = (i, currentBox, positions) => {

@@ -1,24 +1,44 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../components/Card";
 import { usePositionReorder } from "../utls/use-position-reorder";
 import Header from "../components/Header";
 import data from "../data/data";
 
 const Gallery = () => {
-  const [order, updatePosition, updateOrder] = usePositionReorder(data);
-  const [checkedCard, setCheckedCard] = useState([]);
-  // set card checked state
+  const [cardData, setCardData] = useState([...data]);
+  const [order, setOrder, updatePosition, updateOrder] =
+    usePositionReorder(cardData);
+  const [checkedCards, setCheckedCards] = useState([]);
+  
+  // set card checked state, if card is checked then remove it from checkedCard array, if card is not checked then add it to checkedCard array
   const setCardChecked = (id) => {
-    if (checkedCard.includes(id)) {
-      setCheckedCard(checkedCard.filter((i) => i !== id));
+    if (checkedCards?.includes(id)) {
+      const data = checkedCards?.filter((i) => i !== id);
+      setCheckedCards(data);
+      localStorage.setItem("checkedCards", JSON.stringify(data));
     } else {
-      setCheckedCard([...checkedCard, id]);
+      setCheckedCards([...checkedCards, id]);
+      localStorage.setItem(
+        "checkedCards",
+        JSON.stringify([...checkedCards, id])
+      );
     }
+  };
+
+  // delete checked cards
+  const handleDeleteCards = () => {
+    const saveCheckedCards = JSON.parse(localStorage.getItem("checkedCards"));
+    setOrder(cardData.filter((item) => !saveCheckedCards?.includes(item?.id)));
+    setCheckedCards([]);
+    localStorage.removeItem("checkedCards");
   };
   return (
     <div className="md:px-5 w-full h-full">
       <div className="max-w-[1280px] mx-auto w-full md:my-5 xl:my-10 md:border min-h-[70vh] rounded-[10px] h-full">
-        <Header />
+        <Header
+          checkedCards={checkedCards}
+          handleDeleteCards={handleDeleteCards}
+        />
         <div className="px-3 sm:px-4 md:px-5 lg:px-8 xl:px-10 py-3 md:py-4 lg:py-8 grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-5 md:gap-7 lg:gap-8 w-full h-full">
           {order.map((item, i) => (
             <Card
@@ -27,7 +47,7 @@ const Gallery = () => {
               i={i}
               updatePosition={updatePosition}
               updateOrder={updateOrder}
-              checkedCard={checkedCard}
+              checkedCards={checkedCards}
               setCardChecked={setCardChecked}
             />
           ))}

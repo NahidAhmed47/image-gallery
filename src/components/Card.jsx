@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { useMeasurePosition } from "../utls/use-measure-position";
 
-const Card = ({ i, item, updatePosition, updateOrder, checkedCard, setCardChecked }) => {
+const Card = ({ i, item, updatePosition, updateOrder, checkedCards, setCardChecked }) => {
   const [isDragging, setDragging] = useState(false);
   const ref = useMeasurePosition((pos) => updatePosition(i, pos));
 
@@ -41,13 +41,13 @@ const Card = ({ i, item, updatePosition, updateOrder, checkedCard, setCardChecke
       }}
     >
       {isDragging || (
-        <div className={`w-full h-full  absolute top-0 right-0 left-0 bottom-0   duration-300 transition-all p-4 lg:p-5 ${checkedCard.includes(item?.id) ? "bg-opacity-50 bg-white group-hover:opacity-100" : "bg-opacity-40 opacity-0 group-hover:opacity-100 bg-black"}`}>
+        <div className={`w-full h-full  absolute top-0 right-0 left-0 bottom-0   duration-300 transition-all p-4 lg:p-5 ${checkedCards?.includes(item?.id) ? "bg-opacity-50 bg-white group-hover:opacity-100" : "bg-opacity-40 opacity-0 group-hover:opacity-100 bg-black"}`}>
           <input
             type="checkbox"
             name=""
             id=""
             className="w-4 h-4 sm:w-6 sm:h-6"
-            checked={checkedCard.includes(item?.id)}
+            checked={checkedCards?.includes(item?.id)}
             onChange={() => setCardChecked(item?.id)}
           />
         </div>
